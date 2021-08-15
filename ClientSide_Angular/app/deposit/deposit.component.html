@@ -1,0 +1,139 @@
+<h2 class="text-center">Deposit Details</h2>
+
+<!--------------------- HIDE BUTTONS ----------------------------->
+
+<div>
+  <button class="btn btn-primary mx-4" (click)="displayForm()">Add Deposit</button>
+  <button class="btn btn-primary mx-4" (click)="displayList()">
+    Show Deposits
+  </button>
+</div>
+
+<!-------------------------- ACCOUNT FORM ----------------------------->
+
+<div *ngIf="isShowForm">
+  <h2 class="text-center">Deposit Form</h2>
+
+  <form (ngSubmit)="addDeposit()" #accForm="ngForm">
+    <div class="form-group">
+      <label for="cname">Customer Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Customer Name"
+        id="cname"
+        [(ngModel)]="customerName"
+        name="customerName"
+        #dc="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="dc.touched && !dc.valid">
+        Customer Name is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="ddate">Date of deposit:</label>
+      <input
+        type="date"
+        class="form-control"
+        placeholder="Date of deposit"
+        id="ddate"
+        [(ngModel)]="dateOfDeposit"
+        name="dateOfDeposit"
+        #ddate="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="ddate.touched && !ddate.valid">
+        Please select a date.
+      </div>
+    </div>
+    <!-- Account Balance -->
+    <div class="form-group">
+      <label for="accbal">Deposit Amount:</label>
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Deposit Amount"
+        id="accbal"
+        [(ngModel)]="depositAmount"
+        name="depositAmount"
+        #eaccBal="ngModel"
+      />
+    </div>
+    <!-- Account No -->
+    <div class="form-group">
+      <label for="accNo">Account Number:</label>
+      <input
+        class="form-control"
+        type="number"
+        placeholder="Account Number"
+        id="accNo"
+        name="accountNo"
+        [(ngModel)]="accountNo"
+        #eacNo="ngModel"
+        required
+      />
+      <div class="alert alert-danger" *ngIf="eacNo.touched && !eacNo.valid">
+        Account Number is required.
+      </div>
+    </div>
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="btn btn-primary m-2"
+      [disabled]="!accForm.form.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<!--------------- DISPLAYIG DATA ------------------->
+
+<div *ngIf="isShowList">
+  <h4 class="text-center mb-4">Deposits List</h4>
+  <div *ngIf="this.deposits.length === 0; else showLoans">
+    <h6>No Deposits are Taken!!! Please make a Deposit</h6>
+  </div>
+  <ng-template #showLoans>
+    <table class="table table-bordered border-dark">
+      <thead>
+        <tr>
+          <th>Deposit Id</th>
+          <th>Customer Name</th>
+          <th>Deposit Date</th>
+          <th>Deposit Amount</th>
+          <th>Account No</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let deposit of deposits">
+          <td>{{ deposit.depositId }}</td>
+          <td>{{ deposit.customerName }}</td>
+          <td>{{ deposit.dateOfDeposit }}</td>
+          <td>{{ deposit.depositAmount }}</td>
+          <td>{{ deposit.account.accountNo }}</td>
+          <td>
+            <button class="btn btn-sm" (click)="updateDeposit(deposit)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-pencil-square"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

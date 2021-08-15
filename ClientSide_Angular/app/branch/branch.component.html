@@ -1,0 +1,136 @@
+<h2 class="text-center">Branch Details</h2>
+
+<!--------------------- HIDE BUTTONS ----------------------------->
+
+<div>
+  <button class="btn btn-primary mx-4" (click)="displayForm()">
+    Add Branch
+  </button>
+  <button class="btn btn-primary mx-4" (click)="displayList()">
+    Show Branches
+  </button>
+</div>
+
+<!-------------------------- BRANCH FORM ----------------------------->
+
+<div *ngIf="isShowForm">
+  <h2 class="text-center">Branch Form</h2>
+
+  <form (ngSubmit)="addBranch()" #branchForm="ngForm">
+    <!-- Branch Name -->
+    <div class="form-group">
+      <label for="bbname">Branch Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Branch Name"
+        id="bbname"
+        [(ngModel)]="bName"
+        name="bName"
+        #en="ngModel"
+        required
+      />
+      <div class="alert alert-danger" *ngIf="en.touched && !en.valid">
+        Branch Name is required.
+      </div>
+    </div>
+    <!-- Branch Address -->
+    <div class="form-group">
+      <label for="badd">Address:</label>
+      <textarea
+        type="text"
+        name="bAdd"
+        class="form-control"
+        placeholder="Address"
+        id="badd"
+        cols="30"
+        rows="2"
+        [(ngModel)]="bAdd"
+        #address="ngModel"
+        required
+      ></textarea>
+      <div class="alert alert-danger" *ngIf="address.touched && !address.valid">
+        Bank Address is required.
+      </div>
+    </div>
+    <!-- Select Bank Code -->
+    <div class="form-group">
+      <label for="bcode">Bank Code:</label>
+      <select
+        class="form-select"
+        type="number"
+        id="bcode"
+        [(ngModel)]="bankCode"
+        name="bankCode"
+        #eo="ngModel"
+        required
+      >
+        <option [ngValue]="null" selected> -- Select Bank -- </option>
+        <option *ngFor="let bank of banks" [ngValue]="bank.bankCode">
+          {{ bank.bankName }}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="(eo.touched && !eo.valid)">
+        Please select a bank.
+      </div>
+    </div>
+    <!-- Submit -->
+    <button 
+      type="submit" 
+      class="btn btn-primary m-2"
+      [disabled]="!branchForm.form.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<!--------------- DISPLAYIG DATA ------------------->
+
+<div *ngIf="isShowList">
+  <h4 class="text-center mb-4">Bank List</h4>
+  <div *ngIf="this.branchs.length === 0; else showBranches">
+    <h6>No Branches are Added!!! Please add a Branch</h6>
+  </div>
+  <ng-template #showBranches>
+    <table class="table table-bordered border-dark">
+      <thead>
+        <tr>
+          <th>Branch Id</th>
+          <th>Branch Name</th>
+          <th>Branch Address</th>
+          <th>Bank Code</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let branch of branchs">
+          <td>{{ branch.branchId }}</td>
+          <td>{{ branch.branchName }}</td>
+          <td>{{ branch.branchAddress }}</td>
+          <td>{{ branch.bank.bankCode }}</td>
+          <td>
+            <button class="btn btn-sm" (click)="updateBranch(branch)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-pencil-square"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

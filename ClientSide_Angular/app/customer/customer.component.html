@@ -1,0 +1,198 @@
+<h2 class="text-center">Customer Details</h2>
+
+<!--------------------- HIDE BUTTONS ----------------------------->
+
+<div>
+  <button class="btn btn-primary mx-4" (click)="displayForm()">
+    Add Customer
+  </button>
+  <button class="btn btn-primary mx-4" (click)="displayList()">
+    Show Customers
+  </button>
+</div>
+
+<!-------------------------- Customer FORM ----------------------------->
+
+<div *ngIf="isShowForm">
+  <h2 class="text-center">Customer Form</h2>
+
+  <form (ngSubmit)="addCustomer()" #custForm="ngForm">
+    <!-- Customer Name -->
+    <div class="form-group">
+      <label for="cname">Customer Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Customer Name"
+        id="cname"
+        [(ngModel)]="custName"
+        name="custName"
+        #ename="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="ename.touched && !ename.valid">
+        Customer Name is required.
+      </div>
+    </div>
+    <!-- Customer Email -->
+    <div class="form-group">
+      <label for="cemail">Customer Email:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Customer Email"
+        id="cemail"
+        [(ngModel)]="custEmail"
+        name="custName"
+        #email="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="ename.touched && !ename.valid">
+        Customer Mail is required.
+      </div>
+    </div>
+    <!-- Customer Phone -->
+    <div>
+      <label for="cphone">Customer Phone:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Customer Phone"
+        id="cphone"
+        [(ngModel)]="custPhone"
+        name="custPhone"
+        #eph="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="eph.touched && !eph.valid">
+        Customer Phone is required.
+      </div>
+    </div>
+    <!-- Customer Address -->
+    <div>
+      <label for="cadd">Customer Address:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Customer Address"
+        id="cadd"
+        [(ngModel)]="custAdd"
+        name="custAdd"
+        #eadd="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="eadd.touched && !eadd.valid">
+        Customer Id is required.
+      </div>
+    </div>
+    <!-- Address Proof Type -->
+    <div class="form-group">
+      <label for="eidtype">Id Proof :</label>
+      <select
+        class="form-select"
+        type="number"
+        id="eidtype"
+        [(ngModel)]="custAddProofType"
+        name="custAddProofType"
+        #etype="ngModel"
+        required
+      >
+        <option [ngValue]="null" selected> -- Select Bank -- </option>
+        <option *ngFor="let type of addressTypes" [ngValue]="type">
+          {{ type }}
+        </option>
+      </select>
+      <div class="alert alert-danger" *ngIf="(etype.touched && !etype.valid)">
+        Please select a bank.
+      </div>
+    </div>
+    <!-- Address Proof No -->
+    <div class="form-group">
+      <label for="eidno">Id Proof Number:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Id Proof Number"
+        id="eidno"
+        [(ngModel)]="custAddProofNo"
+        name="custAddProofNo"
+        #apn="ngModel"
+      />
+      <div class="alert alert-danger" *ngIf="apn.touched && !apn.valid">
+        Id Proof No is required.
+      </div>
+    </div>
+    <!-- Pancard -->
+    <div>
+      <label for="cpan">Pancard:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Pancard (Optional)"
+        id="cpan"
+        [(ngModel)]="custPancard"
+        name="custPancard"
+      />
+    </div>
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="btn btn-primary m-2"
+      [disabled]="!custForm.form.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<!--------------- DISPLAYIG DATA ------------------->
+
+<div *ngIf="isShowList">
+  <h4 class="text-center mb-4">Bank List</h4>
+  <div *ngIf="this.customers.length === 0; else showCustomers">
+    <h6>No Accounts are Added!!! Please add an Account</h6>
+  </div>
+  <ng-template #showCustomers>
+    <table class="table table-bordered border-dark">
+      <thead>
+        <tr>
+          <th>Customer Id</th>
+          <th>Name</th>
+          <th>Address</th>
+          <th>PhoneNo</th>
+          <th>Email</th>
+          <th>AddressProof</th>
+          <th>Pancard</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers">
+          <td>{{ customer.customerId }}</td>
+          <td>{{ customer.customerName }}</td>
+          <td>{{ customer.customerAddress }}</td>
+          <td>{{ customer.customerPhone }}</td>
+          <td>{{ customer.customerEmail }}</td>
+          <td>{{ customer.addressProofIdType }}</td>
+          <td>{{ customer.pancard }}</td>
+          <td>
+            <button class="btn btn-sm" (click)="updateCustomer(customer)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-pencil-square"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

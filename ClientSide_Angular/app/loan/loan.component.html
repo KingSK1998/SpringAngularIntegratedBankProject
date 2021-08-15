@@ -1,0 +1,171 @@
+<h2 class="text-center">Loan Details</h2>
+
+<!--------------------- HIDE BUTTONS ----------------------------->
+
+<div>
+  <button class="btn btn-primary mx-4" (click)="displayForm()">
+    Add Loan
+  </button>
+  <button class="btn btn-primary mx-4" (click)="displayList()">
+    Show Loans
+  </button>
+</div>
+
+<!-------------------------- ACCOUNT FORM ----------------------------->
+
+<div *ngIf="isShowForm">
+  <h2 class="text-center">Loan Form</h2>
+
+  <form (ngSubmit)="addLoan()" #accForm="ngForm">
+    <!-- Loan Type -->
+    <div class="form-group">
+      <div class="form-group" role="group">
+        <label for="acctype" class="form-label">Loan Type:</label>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label" for="home">Home</label>
+          <input
+            class="form-check-input"
+            type="radio"
+            name="loanType"
+            id="home"
+            value="Home"
+            [(ngModel)]="loanType"
+            #lType="ngModel"
+            required
+            />
+          </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label" for="cur">Car</label>
+          <input
+          class="form-check-input"
+            type="radio"
+            name="loanType"
+            id="cur"
+            value="Car"
+            [(ngModel)]="loanType"
+            #lType="ngModel"
+            required
+            />
+          </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label" for="per">Personal</label>
+          <input
+          class="form-check-input"
+            type="radio"
+            name="loanType"
+            id="per"
+            value="Personal"
+            [(ngModel)]="loanType"
+            #lType="ngModel"
+            required
+            />
+          </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label" for="gold">Gold</label>
+          <input
+          class="form-check-input"
+            type="radio"
+            name="loanType"
+            id="gold"
+            value="Gold"
+            [(ngModel)]="loanType"
+            #lType="ngModel"
+            required
+            />
+          </div>
+        </div>
+        <div class="alert alert-danger" *ngIf="lType.touched && !lType.valid">
+          Loan Type is required.
+      </div>
+    </div>
+    <!-- Account Balance -->
+    <div class="form-group">
+      <label for="accbal">Loan Amount:</label>
+      <input
+      type="number"
+      class="form-control"
+      placeholder="Loan Amount"
+      id="accbal"
+      [(ngModel)]="loanAmount"
+      name="loanAmount"
+      #eaccBal="ngModel"
+      value=1000
+      />
+    </div>
+    <!-- Account No -->
+    <div class="form-group">
+      <label for="accNo">Account Number:</label>
+      <input
+        class="form-control"
+        type="number"
+        placeholder="Account Number"
+        id="accNo"
+        name="accountNo"
+        [(ngModel)]="accountNo"
+        #eacNo="ngModel"
+        required
+      />
+      <div class="alert alert-danger" *ngIf="eacNo.touched && !eacNo.valid">
+        Branch Id is required.
+      </div>
+    </div>
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="btn btn-primary m-2"
+      [disabled]="!accForm.form.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<!--------------- DISPLAYIG DATA ------------------->
+
+<div *ngIf="isShowList">
+  <h4 class="text-center mb-4">Loan List</h4>
+  <div *ngIf="this.loans.length === 0; else showLoans">
+    <h6>No Loans are Taken!!! Please take a Loan</h6>
+  </div>
+  <ng-template #showLoans>
+    <table class="table table-bordered border-dark">
+      <thead>
+        <tr>
+          <th>Loan Id</th>
+          <th>Loan Type</th>
+          <th>Loan Amount</th>
+          <th>Account No</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let loan of loans">
+          <td>{{ loan.loanId }}</td>
+          <td>{{ loan.loanType }}</td>
+          <td>{{ loan.loanAmount }}</td>
+          <!-- <td>{{ loan.accountNo }}</td> -->
+          <td>
+            <button class="btn btn-sm" (click)="updateLoan(loan)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-pencil-square"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                />
+                <path
+                  fill-rule="evenodd"
+                  d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+</div>

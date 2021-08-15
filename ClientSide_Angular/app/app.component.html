@@ -1,0 +1,336 @@
+<!-- HEADER -->
+<header class="container-fluid">
+  <div class="p-2">
+    <div class="row justify-content-center">
+      <div class="col-4 text-end">
+        <!-- Header Logo -->
+        <img
+          src="../assets/bank-logo.jpg"
+          class="rounded-circle border"
+          alt="logo"
+          height="80px"
+        />
+      </div>
+      <div class="col text-start p-lg-3 text-uppercase">
+        <!-- Header Name -->
+        <h1><strong>Welcome to Sahara Bank</strong></h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- NAVIGATIONS -->
+
+<!-- HOME -->
+<nav class="navbar bg-dark" *ngIf="activeHome()">
+  <div class="container-fluid border-bottom border-white">
+    <ul class="nav nav-tabs">
+      <a class="nav-item" href="#"
+        ><img src="../assets/bank-logo.jpg" width="50"
+      /></a>
+      <li class="nav-item">
+        <a
+          routerLink="/home"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Home</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ADMIN -->
+<nav class="navbar bg-dark" *ngIf="adminActive()">
+  <div class="container-fluid border-bottom border-white">
+    <ul class="nav nav-tabs">
+      <a class="nav-item" href="#"
+        ><img src="../assets/bank-logo.jpg" width="50"
+      /></a>
+      <li class="nav-item">
+        <a
+          routerLink="/admin"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Admin</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/bank"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Bank</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/branch"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Branch</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Manager -->
+<nav class="navbar bg-dark" *ngIf="activeManager()">
+  <div class="container-fluid border-bottom border-white">
+    <ul class="nav nav-tabs">
+      <a class="nav-item" href="#"
+        ><img src="../assets/bank-logo.jpg" width="50"
+      /></a>
+      <li class="nav-item">
+        <a
+          routerLink="/manager"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Manager</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/loan"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Loan</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/bank-employee"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Bank Employee</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<nav class="navbar bg-dark" *ngIf="activeClerk()">
+  <div class="container-fluid border-bottom border-white">
+    <ul class="nav nav-tabs">
+      <a class="nav-item" href="#"
+        ><img src="../assets/bank-logo.jpg" width="50"
+      /></a>
+      <li class="nav-item">
+        <a
+          routerLink="/clerk"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Clerk</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/account"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Account</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link bg-dark text-white">Loan Application</a>
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/customer"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Customer</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          routerLink="/deposit"
+          class="nav-link bg-dark text-white"
+          routerLinkActive="active current"
+          >Deposit</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- WRAPPER -->
+<!-- Side Bar -->
+<div class="d-flex">
+  <aside>
+    <div
+      class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+      style="width: 280px"
+    >
+      <a
+        class="d-flex text-center mb-3 mb-md-0 mx-3 me-md-auto text-white text-decoration-none"
+      >
+        <img
+          src="../assets/bank-logo.jpg"
+          class="bi me-2"
+          width="40"
+          height="32"
+        />
+        <span class="fs-4  text-center">Net Banking</span>
+      </a>
+      <hr />
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item" *ngIf="activeHome()">
+          <a
+            class="nav-link text-center text-white"
+            routerLinkActive="active current"
+            routerLink="/home"
+          >
+            Home
+          </a>
+        </li>
+        <!-- Admin -->
+        <div *ngIf="adminActive()">
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/admin"
+          >
+            Admin
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/bank"
+          >
+            Bank
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/branch"
+          >
+            Branch
+          </a>
+        </li>
+      </div>
+
+      <!-- Manager -->
+      <div *ngIf="activeManager()">
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/manager"
+          >
+            Manager
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/loan"
+          >
+            Loan Approve
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/bank-employee"
+          >
+            Bank Employee
+          </a>
+        </li>
+      </div>
+
+      <!-- Clerk -->
+      <div *ngIf="activeClerk()">
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/clerk"
+          >
+            Clerk
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/account"
+          >
+            Account
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+          >
+            Make Loan Request
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/customer"
+          >
+            Customer
+          </a>
+        </li>
+        <li>
+          <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/deposit"
+          >
+            Deposit
+          </a>
+        </li>
+      </div>
+      </ul>
+      <!-- Log Out -->
+      <hr />
+      <div class="text-center" *ngIf="!activeHome()">
+        <a
+            class="nav-link text-white text-center"
+            routerLinkActive="active current"
+            routerLink="/branch"
+          >
+            LogOut
+          </a>
+      </div>
+    </div>
+  </aside>
+
+  <section class="flex-fill">
+    <div class="flex-shrink-0 p-3">
+      <div></div>
+      <router-outlet></router-outlet>
+    </div>
+  </section>
+</div>
+<!-- FOOTER -->
+<footer class="border-top">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-2">
+        <h6>Temporary Footer:</h6>
+      </div>
+      <div class="col text-center">
+        <h6>Author: Shivam Kashyap</h6>
+      </div>
+      <div class="col text-center">
+        <h6>Project: Bank</h6>
+      </div>
+      <div class="col text-center">
+        <h6>Last Update: 15 August 2021</h6>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,44 @@
+<h4 class="text-center">Add Bank</h4>
+<form (ngSubmit)="addBank()">
+  <!-- Bank Name -->
+  <div class="form-group">
+    <label for="bname">Bank Name:</label>
+    <input
+      class="form-control"
+      placeholder="Bank Name"
+      type="text"
+      name="bankName"
+      [(ngModel)]="bankName"
+      #name="ngModel"
+      required
+    />
+    <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
+      Bank Name is required.
+    </div>
+  </div>
+  <!-- Bank Address -->
+  <div class="form-group">
+    <label for="badd">Address:</label>
+    <textarea
+      type="text"
+      name="bankAddress"
+      class="form-control"
+      placeholder="Address"
+      cols="30"
+      rows="2"
+      [(ngModel)]="bankAddress"
+      #address="ngModel"
+      required
+    ></textarea>
+    <div class="alert alert-danger" *ngIf="address.touched && !address.valid">
+      Bank Address is required.
+    </div>
+  </div>
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="btn btn-primary m-2"
+  >
+    Add Bank
+  </button>
+</form>

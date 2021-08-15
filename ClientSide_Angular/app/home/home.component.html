@@ -1,0 +1,43 @@
+<div>
+  <h2 class="text-center">Log In Details</h2>
+
+  <form id="myForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="user">User Id:</label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="1234567890"
+        id="user"
+        [(ngModel)]="userId"
+        name="userId"
+      />
+    </div>
+    <div class="text-center my-3">
+      <h6> -- OR -- </h6>
+    </div>
+    <div>
+      <label for="user">User Name:</label>
+      <input
+        type="email"
+        class="form-control"
+        placeholder="example@mail.com"
+        id="user"
+        [(ngModel)]="email"
+        name="email"
+      />
+    </div>
+    <div>
+      <label for="p">Password:</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="*******"
+        id="p"
+        [(ngModel)]="pass"
+        name="pass"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary my-2">Save and Submit</button>
+  </form>
+</div>
